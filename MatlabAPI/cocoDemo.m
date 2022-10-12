@@ -1,9 +1,12 @@
 %% Demo for the CocoApi (see CocoApi.m)
 
+
+%  mex('COMPFLAGS=\$COMPFLAGS -std=c++11 -Wall','-largeArrayDims','private/gasonMex.cpp','../common/gason.cpp','-I../common/','-outdir','private');
+
 %% initialize COCO api (please specify dataType/annType below)
 annTypes = { 'instances', 'captions', 'person_keypoints' };
-dataType='val2014'; annType=annTypes{1}; % specify dataType/annType
-annFile=sprintf('../annotations/%s_%s.json',annType,dataType);
+dataType='val2017'; annType=annTypes{1}; % specify dataType/annType
+annFile=sprintf('../../annotations/%s_%s.json',annType,dataType);
 coco=CocoApi(annFile);
 
 %% display COCO categories and supercategories
@@ -22,7 +25,7 @@ imgId = imgIds(randi(length(imgIds)));
 
 %% load and display image
 img = coco.loadImgs(imgId);
-I = imread(sprintf('../images/%s/%s',dataType,img.file_name));
+I = imread(sprintf('../../images/%s/%s',dataType,img.file_name));
 figure(1); imagesc(I); axis('image'); set(gca,'XTick',[],'YTick',[])
 
 %% load and display annotations
